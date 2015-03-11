@@ -1,15 +1,13 @@
 
-angular.module('sample', [
+angular.module('ml.retail', [
     'ngRoute',
     'ui.bootstrap',
-    'http-auth-interceptor',
-    'ng.httpLoader',
     'ml.common',
     'ml.search',
     'ml.search.tpls',
     'google-maps',
 ])
-  .config(['$routeProvider', '$locationProvider', 'mlMapsProvider', function ($routeProvider, $locationProvider) {
+  .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
     'use strict';
 
@@ -18,19 +16,27 @@ angular.module('sample', [
     $routeProvider
       .when('/', {
         templateUrl: '/home/splash.html',
-        controller: 'SplashCtrl'
+        controller: 'splashCtrl'
       })
       .when('/login', {
         templateUrl: '/user/login.html',
-        controller: 'LoginCtrl'
+        controller: 'loginCtrl as ctrl'
       })
-      .when('/user1/dashboard', {
-        templateUrl: '/user1/dashboard.html',
-        controller: 'User1DashboardCtrl'
+      .when('/marketer/dashboard', {
+        templateUrl: '/marketer/dashboard.html',
+        controller: 'marketerDashboardCtrl'
       })
-      .when('/user2/dashboard', {
-        templateUrl: '/user2/dashboard.html',
-        controller: 'User2DashboardCtrl'
+      .when('/analyst/dashboard', {
+        templateUrl: '/analyst/dashboard.html',
+        controller: 'analystDashboardCtrl'
+      })
+      .when('/manager/dashboard', {
+        templateUrl: '/manager/dashboard.html',
+        controller: 'managerDashboardCtrl'
+      })
+      .when('/loyalty/dashboard', {
+        templateUrl: '/loyalty/dashboard.html',
+        controller: 'loyaltyDashboardCtrl'
       })
       .otherwise({
         redirectTo: '/'

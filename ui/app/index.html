@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>DMLC Retail</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="sample">
+  <body ng-app="ml.retail">
     <nav class="navbar navbar-default" role="navigation">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -20,21 +20,23 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">Sample App</a>
+        <a class="navbar-brand" href="/">DMLC Retail</a>
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="/">Search</a></li>
-          <li><a href="/create">Create</a></li>
+          <li><a href="/">Sources</a></li>
+          <li><a href="/login">Login</a></li>
         </ul>
-        <div class="navbar-form navbar-left">
-          <ml-remote-input></ml-remote-input>
-        </div>
         <ml-user></ml-user>
       </div><!-- /.navbar-collapse -->
     </nav>
+
+
     <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+    <div class="container" ng-view="">
+
+
+    </div>
 
     <div id="footer">
       <div class="powered"></div>
@@ -43,7 +45,8 @@
     <!-- build:js scripts/plugins.js -->
     <script src="/bower_components/jquery/jquery.js"></script>
     <script src="/bower_components/angular/angular.js"></script>
-    <script src="../bower_components/highcharts/highcharts.src.js"></script>
+    <script src="/bower_components/lodash/dist/lodash.min.js"></script>
+    <script src="/bower_components/highcharts/highcharts.src.js"></script>
     <script src="/bower_components/angular-route/angular-route.js"></script>
     <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
@@ -55,6 +58,9 @@
     <!-- build:js scripts/scripts.js -->
     <script src="/app.js"></script>
     <script src="/common/common.js"></script>
+    <script src="/common/google-maps.js"></script>
+    <script src="/user/login.ctrl.js"></script>
+    <script src="/home/splash.ctrl.js"></script>
     <!-- endbuild -->
 
   </body>
