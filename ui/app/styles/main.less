@@ -1,21 +1,81 @@
 @import "../bower_components/bootstrap/less/bootstrap.less";
 @import "../bower_components/font-awesome/less/font-awesome.less";
+@import "../bower_components/roboto-fontface/roboto-fontface.less";
 @icon-font-path:  "/fonts/";
 @FontAwesomePath:    "/fonts/";
+@roboto-font-path: '/fonts/';
+
+body { background: #FFF; font-family: 'Roboto', 'Comic Sans', serif; }
+
+
+.navbar {
+  background-color: #222;
+  font-size: 18px;
+  min-height: 0;
+  height: 40px;
+
+  .navbar-brand:hover, .navbar-brand:focus, .navbar-brand, .navbar-nav li a, .navbar-nav li a:hover, .navbar-nav li a:focus { color: #FFF; }
+
+  .navbar-brand {
+    font-size: 20px;
+    padding: 7px 0;
+    height: auto;
+    line-height: normal;
+    color: #EEE;
+    font-weight: normal;
+
+    .glyphicon-fire { color: red;}
+  }
+
+  .navbar-nav li a {
+    padding: 10px;
+    height: auto;
+    line-height: normal;
+  }
+
+  .navbar-toggle {
+    border: none;
+    color: #FFF;
+    margin: 6px 0 0;
+    padding: 0;
+
+    &:hover, &:focus { background: transparent; }
+  }
+}
+
+#mainview {
+  padding-bottom: 80px;
+}
+
+aside#sidenav {
+  min-height: 100%;
+  background: #CCC;
+}
 
 #footer {
-  border-top: 1px solid;
-  height: 51px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   margin-top: 15px;
+  background: #FFF;
+  border-top: solid 1px #DDD;
 
   .powered {
     background-image: url(/images/PoweredByMarkLogic.png);
     background-repeat: no-repeat;
-    float: right;
     height: 50px;
-    margin-right: 20px;
-    width: 161px;
+    width: 146px;
+    margin: 10px 0 0;
+    background-size: contain;
+    float: right;
   }
+}
+
+.jumbotron {
+  padding-top: 16px;
+  border-radius: 4px;
+
+  p { font-size: 16px; }
 }
 
 .detail {

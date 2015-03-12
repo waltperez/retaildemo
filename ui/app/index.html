@@ -12,20 +12,17 @@
     <!-- endbuild -->
   </head>
   <body ng-app="ml.retail">
-    <nav class="navbar navbar-default" role="navigation">
-      <div class="navbar-header">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="navbar-header col-sm-4">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
           <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+          <span class="fa fa-bars"></span>
         </button>
-        <a class="navbar-brand" href="/">DMLC Retail</a>
+        <a class="navbar-brand" href="/"><div class="glyphicon glyphicon-fire"></div> DMLC Retail</a>
       </div>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="collapse navbar-collapse col-sm-8 pull-right" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="/">Sources</a></li>
-          <li><a href="/login">Login</a></li>
+          <li><a href="/login"><span class="fa fa-sign-in" title="Sign in"></span></a></li>
         </ul>
         <ml-user></ml-user>
       </div><!-- /.navbar-collapse -->
@@ -33,14 +30,13 @@
 
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view="">
+    <div class="container-fluid" id="mainview" ng-view></div>
 
-
-    </div>
-
-    <div id="footer">
-      <div class="powered"></div>
-    </div>
+    <footer id="footer" class="footer footer-default">
+      <div class="container-fluid">
+        <div class="powered"></div>
+      </div>
+    </footer>
 
     <!-- build:js scripts/plugins.js -->
     <script src="/bower_components/jquery/jquery.js"></script>
