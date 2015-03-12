@@ -16,7 +16,7 @@ angular.module('ml.retail', [
     $routeProvider
       .when('/', {
         templateUrl: '/home/splash.html',
-        controller: 'splashCtrl'
+        controller: 'splashCtrl as splashCtrl'
       })
       .when('/login', {
         templateUrl: '/user/login.html',
