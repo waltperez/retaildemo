@@ -8,6 +8,23 @@
 #
 class ServerConfig
 
+  def deploy_customers
+    log_header "Deploying Customers"
+
+    ARGV.push('import')
+    ARGV.push('-input_file_path')
+    ARGV.push('data/customers')
+    ARGV.push('-output_uri_replace')
+    ARGV.push(%Q{"#{ServerConfig.expand_path("#{@@path}/../data")},''"})
+    ARGV.push('-output_collections')
+    ARGV.push('customers')
+    ARGV.push('-output_permissions')
+
+    role_name = @properties['ml.app-name'] + "-role"
+    ARGV.push("#{role_name},read,#{role_name},update,#{role_name},insert,#{role_name},execute")
+    mlcp
+  end
+
   #
   # You can easily "override" existing methods with your own implementations.
   # In ruby this is called monkey patching
