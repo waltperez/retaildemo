@@ -1,3 +1,4 @@
+'use strict';
 
 angular.module('ml.retail', [
     'ngRoute',
@@ -7,9 +8,26 @@ angular.module('ml.retail', [
     'ml.search.tpls',
     'google-maps',
 ])
-  .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+  .controller('appCtrl', [ 'userService', '$scope', '$location', function(userService, $scope, $location) {
 
-    'use strict';
+    var ctrl = this;
+
+    ctrl.logout = function() {
+      console.log('logging out');
+      userService.logout();
+    };
+
+    $scope.$watch(function() { return userService.user; }, function(newVal,oldVal) {
+      if (newVal) {
+        ctrl.username = newVal.username;
+      } else {
+        ctrl.username = null;
+        $location.path('/').search('');
+      }
+    });
+
+  }])
+  .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
     $locationProvider.html5Mode(true);
 
@@ -24,7 +42,7 @@ angular.module('ml.retail', [
       })
       .when('/marketer/dashboard', {
         templateUrl: '/marketer/dashboard.html',
-        controller: 'marketerDashboardCtrl'
+        controller: 'marketerCtrl as markterCtrl'
       })
       .when('/analyst/dashboard', {
         templateUrl: '/analyst/dashboard.html',
@@ -667,20 +685,32 @@ angular.module('sample.common', [])
 })();
 
 (function () {
+
+  var app = angular.module('ml.retail');
+
+  app.controller('marketerCtrl', MarketerCtrl);
+
+  function MarketerCtrl() {
+
+  }
+
+})();
+
+(function () {
   'use strict';
     var app = angular.module('ml.retail');
 
     app.controller('loginCtrl', LoginCtrl);
 
-    LoginCtrl.$inject = ['$http', '$scope'];
-    function LoginCtrl($http, $scope) {
+    LoginCtrl.$inject = ['userService', '$scope', '$location'];
+    function LoginCtrl(userService, $scope, $location) {
       var ctrl = this;
 
       ctrl.users = {
-        'marketer': { label: 'Marketer', desc: 'Manages marketing and promotional campaigns - including social media' },
-        'analyst': { label: 'Analyst', desc: 'Analyzes sales performance, site performance, etc' },
-        'loyalty': { label: 'Customer Loyalty Manager', desc: 'Maintains customer loyalty via rewards, social campaigns, targetted cross-selling, etc' },
-        'manager': { label: 'Store Manager', desc: 'Manages operations of the retail store' }
+        'marketer': { label: 'Marketer', desc: 'Manages marketing and promotional campaigns - including social media', name: 'John Marketer' },
+        'analyst': { label: 'Analyst', desc: 'Analyzes sales performance, site performance, etc', name: 'Susie Analyst'},
+        'loyalty': { label: 'Customer Loyalty Manager', desc: 'Maintains customer loyalty via rewards, social campaigns, targetted cross-selling, etc', name: 'Tom Loyalty' },
+        'manager': { label: 'Store Manager', desc: 'Manages operations of the retail store', name: 'Jane Boss'}
       };
 
       $scope.$watch('ctrl.username', function(newVal, oldVal) {
@@ -691,7 +721,38 @@ angular.module('sample.common', [])
           ctrl.userdesc = ctrl.userlabel = null;
         }
       });
+
+      ctrl.login = function() {
+        userService.login(ctrl.username, ctrl.users[ctrl.username].name);
+        $location.path('/' + ctrl.username + '/dashboard').search('');
+      };
     }
+})();
+
+(function () {
+  'use strict';
+
+  var app = angular.module('ml.retail');
+
+  app.service('userService', UserService);
+
+
+  UserService.$inject = ['$http', '$rootScope'];
+  function UserService($http, $rootScope) {
+    var service = {};
+    service.user = null;
+
+    service.login = function(role,username) {
+      service.user = { role: role, username: username };
+    };
+
+    service.logout = function() {
+      service.user = null;
+    };
+
+    return service;
+  }
+
 })();
 
 

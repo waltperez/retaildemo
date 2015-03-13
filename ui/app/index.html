@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="ml.retail">
+  <body ng-app="ml.retail" ng-controller="appCtrl as appCtrl">
     <nav class="navbar navbar-default navbar-static-top">
       <div class="navbar-header col-sm-4">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -21,8 +21,13 @@
         <a class="navbar-brand" href="/"><div class="glyphicon glyphicon-fire"></div> DMLC Retail</a>
       </div>
       <div class="collapse navbar-collapse col-sm-8 pull-right" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav" ng-if="!appCtrl.username">
           <li><a href="/login"><span class="fa fa-sign-in" title="Sign in"></span></a></li>
+        </ul>
+        <ul class="nav navbar-nav" ng-if="appCtrl.username">
+          <li><a><span class="fa fa-inbox" title="Notifications"></span></a></li>
+          <li><a><span class="fa fa-gear" title="Preferences"></span></a></li>
+          <li><a><span class="fa fa-sign-out" ng-click="appCtrl.logout()" title="Sign Out"></span></a></li>
         </ul>
         <ml-user></ml-user>
       </div><!-- /.navbar-collapse -->
@@ -56,7 +61,9 @@
     <script src="/common/common.js"></script>
     <script src="/common/google-maps.js"></script>
     <script src="/user/login.ctrl.js"></script>
+    <script src="/user/user.svc.js"></script>
     <script src="/home/splash.ctrl.js"></script>
+    <script src="/marketer/marketer.ctrl.js"></script>
     <!-- endbuild -->
 
   </body>

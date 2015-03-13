@@ -1,3 +1,4 @@
+'use strict';
 
 angular.module('ml.retail', [
     'ngRoute',
@@ -7,9 +8,26 @@ angular.module('ml.retail', [
     'ml.search.tpls',
     'google-maps',
 ])
-  .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+  .controller('appCtrl', [ 'userService', '$scope', '$location', function(userService, $scope, $location) {
 
-    'use strict';
+    var ctrl = this;
+
+    ctrl.logout = function() {
+      console.log('logging out');
+      userService.logout();
+    };
+
+    $scope.$watch(function() { return userService.user; }, function(newVal,oldVal) {
+      if (newVal) {
+        ctrl.username = newVal.username;
+      } else {
+        ctrl.username = null;
+        $location.path('/').search('');
+      }
+    });
+
+  }])
+  .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
     $locationProvider.html5Mode(true);
 
@@ -24,7 +42,7 @@ angular.module('ml.retail', [
       })
       .when('/marketer/dashboard', {
         templateUrl: '/marketer/dashboard.html',
-        controller: 'marketerDashboardCtrl'
+        controller: 'marketerCtrl as markterCtrl'
       })
       .when('/analyst/dashboard', {
         templateUrl: '/analyst/dashboard.html',
