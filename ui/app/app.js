@@ -57,8 +57,8 @@ angular.module('ml.retail', [
         controller: 'loyaltyDashboardCtrl'
       })
       .when('/consumer/home', {
-        templateUrl: '/consumer/home.html',
-        controller: 'consumerHomeCtrl'
+        templateUrl: '/consumer/consumer_home.html',
+        controller: 'consumerHomeCtrl as consumerCtrl'
       })
       .otherwise({
         redirectTo: '/consumer/home'

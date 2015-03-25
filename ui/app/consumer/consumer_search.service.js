@@ -16,10 +16,19 @@
       }
 
       service.parseResults = function(data) {
+        service.isSearching = false;
         service.results = data;
         service.qtext = service.mlSearch.getText();
         service.page = service.mlSearch.getPage();
       }
+
+      service.searchText = function(t) {
+        service.startSearch();
+        service.mlSearch.setText(t).setPage(1).search().then(service.parseResults);
+      }
+
+      service.startSearch = function() { service.isSearching = true; }
+
 
       return service;
 

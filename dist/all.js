@@ -57,8 +57,8 @@ angular.module('ml.retail', [
         controller: 'loyaltyDashboardCtrl'
       })
       .when('/consumer/home', {
-        templateUrl: '/consumer/home.html',
-        controller: 'consumerHomeCtrl'
+        templateUrl: '/consumer/consumer_home.html',
+        controller: 'consumerHomeCtrl as consumerCtrl'
       })
       .otherwise({
         redirectTo: '/consumer/home'
@@ -621,9 +621,11 @@ angular.module('sample.common', [])
     ConsumerHomeCtrl.$injector = ['consumerSearchService', '$scope'];
     function ConsumerHomeCtrl(consumerSearchService, $scope) {
         var ctrl = this;
+        ctrl.isSearching = consumerSearchService.mlSearch;
 
-        $scope.$watch(function() { return consumerSearchService.results}, function(newVal,oldVal) {
 
+        $scope.$watch(function() { return consumerSearchService.isSearching}, function(newVal,oldVal) {
+          ctrl.isSearching = newVal;
         });
     }
 
@@ -647,13 +649,47 @@ angular.module('sample.common', [])
       }
 
       service.parseResults = function(data) {
+        service.isSearching = false;
         service.results = data;
         service.qtext = service.mlSearch.getText();
         service.page = service.mlSearch.getPage();
       }
 
+      service.searchText = function(t) {
+        service.startSearch();
+        service.mlSearch.setText(t).setPage(1).search().then(service.parseResults);
+      }
+
+      service.startSearch = function() { service.isSearching = true; }
+
+
       return service;
 
+    }
+})();
+
+(function () {
+    var app = angular.module('ml.retail');
+
+    app.directive('consumerSubnav', ConsumerSubnav);
+
+    ConsumerSubnav.$injector = ['consumerSearchService']
+    function ConsumerSubnav(consumerSearchService) {
+      return {
+        restrict: 'E',
+        replace: true,
+        link: function(scope) {
+          scope.searchText = '';
+          scope.doSearch = function() {
+            if (scope.searchForm.$valid) {
+              consumerSearchService.searchText(scope.searchText);
+            } else {
+              console.log('invalid');
+            }
+          }
+        },
+        templateUrl: '/consumer/consumer_subnav.html'
+      }
     }
 })();
 

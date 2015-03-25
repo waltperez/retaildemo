@@ -1,0 +1,15 @@
+<nav class="navbar navbar-secondary navbar-static-top">
+  <ul class="nav navbar-nav navbar-pills">
+    <li><a>Electronics</a></li>
+    <li><a>Appliances</a></li>
+    <li><a>Books</a></li>
+  </ul>
+  <form class="navbar-form pull-right col-sm-2" name="searchForm" novalidate>
+    <div class="input-group">
+      <input type="text" name="qtext" placeholder="Search" class="form-control" ng-model="searchText" required>
+      <div class="input-group-btn">
+        <button class="btn btn-default" ng-click="doSearch()"><span class="fa fa-search"></span></button>
+      </div>
+    </div>
+  </form>
+</nav>
