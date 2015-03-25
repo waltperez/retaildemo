@@ -32,7 +32,7 @@ angular.module('ml.retail', [
     $locationProvider.html5Mode(true);
 
     $routeProvider
-      .when('/', {
+      .when('/splash', {
         templateUrl: '/home/splash.html',
         controller: 'splashCtrl as splashCtrl'
       })
@@ -56,7 +56,11 @@ angular.module('ml.retail', [
         templateUrl: '/loyalty/dashboard.html',
         controller: 'loyaltyDashboardCtrl'
       })
+      .when('/consumer/home', {
+        templateUrl: '/consumer/home.html',
+        controller: 'consumerHomeCtrl'
+      })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/consumer/home'
       });
   }]);

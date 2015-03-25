@@ -32,7 +32,7 @@ angular.module('ml.retail', [
     $locationProvider.html5Mode(true);
 
     $routeProvider
-      .when('/', {
+      .when('/splash', {
         templateUrl: '/home/splash.html',
         controller: 'splashCtrl as splashCtrl'
       })
@@ -56,8 +56,12 @@ angular.module('ml.retail', [
         templateUrl: '/loyalty/dashboard.html',
         controller: 'loyaltyDashboardCtrl'
       })
+      .when('/consumer/home', {
+        templateUrl: '/consumer/home.html',
+        controller: 'consumerHomeCtrl'
+      })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/consumer/home'
       });
   }]);
 
@@ -608,6 +612,50 @@ angular.module('sample.common', [])
     };
   }]);
 }());
+
+(function () {
+
+    var app = angular.module('ml.retail')
+    app.controller('consumerHomeCtrl', ConsumerHomeCtrl);
+
+    ConsumerHomeCtrl.$injector = ['consumerSearchService', '$scope'];
+    function ConsumerHomeCtrl(consumerSearchService, $scope) {
+        var ctrl = this;
+
+        $scope.$watch(function() { return consumerSearchService.results}, function(newVal,oldVal) {
+
+        });
+    }
+
+})();
+
+(function () {
+    var app = angular.module('ml.retail');
+
+    app.factory('consumerSearchService', ConsumerSearchService);
+
+    ConsumerSearchService.$inject = ['MLSearchFactory'];
+    function ConsumerSearchService(MLSearchFactory) {
+
+      var service = {};
+
+      // this will probably end up searching just products
+      service.mlSearch = MLSearchFactory.newContext({});
+
+      service.fromParams = function() {
+        service.mlSearch.fromParams().then(service.parseResults);
+      }
+
+      service.parseResults = function(data) {
+        service.results = data;
+        service.qtext = service.mlSearch.getText();
+        service.page = service.mlSearch.getPage();
+      }
+
+      return service;
+
+    }
+})();
 
 (function () {
 

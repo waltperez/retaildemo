@@ -12,15 +12,15 @@
     <!-- endbuild -->
   </head>
   <body ng-app="ml.retail" ng-controller="appCtrl as appCtrl">
-    <nav class="navbar navbar-default navbar-static-top">
-      <div class="navbar-header col-sm-4">
+    <nav class="navbar navbar-primary navbar-default navbar-static-top">
+      <div class="navbar-header col-sm-2">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
           <span class="sr-only">Toggle navigation</span>
           <span class="fa fa-bars"></span>
         </button>
-        <a class="navbar-brand" href="/"><div class="glyphicon glyphicon-fire"></div> DMLC Retail</a>
+        <a class="navbar-brand" href="/"><div class="glyphicon glyphicon-fire"></div> ML<BR> Retail</a>
       </div>
-      <div class="collapse navbar-collapse col-sm-8 pull-right" id="bs-example-navbar-collapse-1">
+      <div class="collapse navbar-collapse col-sm-2 pull-right" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav" ng-if="!appCtrl.username">
           <li><a href="/login"><span class="fa fa-sign-in" title="Sign in"></span></a></li>
         </ul>
@@ -31,6 +31,21 @@
         </ul>
         <ml-user></ml-user>
       </div><!-- /.navbar-collapse -->
+    </nav>
+    <nav class="navbar navbar-secondary navbar-static-top">
+      <ul class="nav navbar-nav navbar-pills">
+        <li><a>Electronics</a></li>
+        <li><a>Appliances</a></li>
+        <li><a>Books</a></li>
+      </ul>
+      <form class="navbar-form navbar-right col-sm-2">
+        <div class="input-group">
+          <input type="text" name="qtext" placeholder="Search" class="form-control">
+          <div class="input-group-btn">
+            <button class="btn btn-default"><span class="fa fa-search"></span></button>
+          </div>
+        </div>
+      </form>
     </nav>
 
 
@@ -64,6 +79,8 @@
     <script src="/user/user.svc.js"></script>
     <script src="/home/splash.ctrl.js"></script>
     <script src="/marketer/marketer.ctrl.js"></script>
+    <script src="/consumer/consumer_home.ctrl.js"></script>
+    <script src="/consumer/consumer_search.service.js"></script>
     <!-- endbuild -->
 
   </body>

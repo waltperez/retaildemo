@@ -6,27 +6,38 @@
 @roboto-font-path: '/fonts/';
 
 html { height: 100%; }
-body { background: #FFF; font-family: 'Roboto', 'Comic Sans', serif; height: 100%; }
+body { background: #CCC; font-family: 'Roboto', 'Comic Sans', serif; height: 100%; }
 
 
 .navbar {
-  background-color: #222;
+  background-color: #3A3A3A;
   font-size: 16px;
   min-height: 0;
-  height: 40px;
+  height: 36px;
   margin-bottom: 0;
+  border-bottom: 0;
 
   .navbar-brand:hover, .navbar-brand:focus, .navbar-brand, .navbar-nav li a, .navbar-nav li a:hover, .navbar-nav li a:focus { color: #FFF; }
 
   .navbar-brand {
-    font-size: 20px;
-    padding: 7px 0;
+    font-size: 25px;
+    padding: 13px;
     height: auto;
     line-height: normal;
     color: #EEE;
     font-weight: normal;
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 140px;
+    height: 90px;
+    background: #ea1213;
+    text-align: center;
+    box-shadow: 2px -1px 2px #333;
 
-    .glyphicon-fire { color: red;}
+    &:hover, &:focus, &:active { background: #ff1f1f; }
+
+    .glyphicon-fire { color: orange;}
   }
 
   & .text {
@@ -36,7 +47,7 @@ body { background: #FFF; font-family: 'Roboto', 'Comic Sans', serif; height: 100
   }
 
   .navbar-nav li a {
-    padding: 10px 12px 0;
+    padding: 9px 12px;
     height: auto;
     line-height: normal;
     cursor: pointer;
@@ -49,6 +60,39 @@ body { background: #FFF; font-family: 'Roboto', 'Comic Sans', serif; height: 100
     padding: 0;
 
     &:hover, &:focus { background: transparent; }
+  }
+}
+
+.navbar-secondary {
+  background: #252525;
+  box-shadow: -5px 0 2px;
+  z-index: 1;
+  height: auto;
+  clear: both;
+  top: -1px;
+
+  .navbar-nav {
+    margin-left: 200px;
+
+    li a {
+      padding: 14px;
+
+      &:hover, &:focus { background: #151515; border: none }
+    }
+  }
+
+  .navbar-form {
+    padding-right: 22px;
+
+    input[name="qtext"] {
+      border: solid #666 1px;
+      background: #323232;
+      color: #FFF;
+      font-size: 12px;
+      padding: 4px;
+      width: 275px;
+      border-radius: 10px 0 0 10px;
+    }
   }
 }
 
