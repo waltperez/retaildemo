@@ -222,6 +222,14 @@
           <range-value-positions>false</range-value-positions>
         </range-element-index>
 
+          <range-element-index>
+              <scalar-type>string</scalar-type>
+              <namespace-uri></namespace-uri>
+              <localname>productId type new active lowPriceGuarantee onSale preowned salesRankLongTerm productTemplate categoryPath freeShipping</localname>
+              <collation>http://marklogic.com/collation/codepoint</collation>
+              <range-value-positions>false</range-value-positions>
+          </range-element-index>
+
         <!--
         Sample for:
           <name xmlns="http://marklogic.com/ns/sample">bob<name>
@@ -281,6 +289,20 @@
           <invalid-values>reject</invalid-values>
         </range-path-index>
 -->
+          <range-path-index>
+              <scalar-type>string</scalar-type>
+              <collation>http://marklogic.com/collation/codepoint</collation>
+              <path-expression>/product/accessories/sku</path-expression>
+              <range-value-positions>false</range-value-positions>
+              <invalid-values>reject</invalid-values>
+          </range-path-index>
+          <range-path-index>
+              <scalar-type>string</scalar-type>
+              <collation>http://marklogic.com/collation/codepoint</collation>
+              <path-expression>/product/relatedProducts/sku</path-expression>
+              <range-value-positions>false</range-value-positions>
+              <invalid-values>reject</invalid-values>
+          </range-path-index>
       </range-path-indexes>
 
       <geospatial-element-indexes>
