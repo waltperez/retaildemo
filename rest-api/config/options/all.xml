@@ -4,7 +4,7 @@
     <search:additional-query>
         <cts:and-query xmlns:cts="http://marklogic.com/cts">
             <cts:collection-query>
-                <cts:uri>reports</cts:uri>
+                <cts:uri>products</cts:uri>
             </cts:collection-query>
         </cts:and-query>
     </search:additional-query>
