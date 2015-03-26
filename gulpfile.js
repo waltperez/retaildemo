@@ -27,7 +27,9 @@ var uglify = require('gulp-uglify');
 var options = {
   appPort: argv['app-port'] || 9070,
   mlHost: argv['ml-host'] || 'localhost',
-  mlPort: argv['ml-port'] || '9102'
+  mlPort: argv['ml-port'] || '9040',
+  defaultUser: 'admin',
+  defaultPass: 'admin'
 };
 
 gulp.task('jshint', function() {

@@ -9,7 +9,7 @@
       var service = {};
 
       // this will probably end up searching just products
-      service.mlSearch = MLSearchFactory.newContext({});
+      service.mlSearch = MLSearchFactory.newContext({ pageLength: 12 });
 
       service.fromParams = function() {
         service.mlSearch.fromParams().then(service.parseResults);

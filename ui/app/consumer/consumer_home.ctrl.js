@@ -6,7 +6,7 @@
     ConsumerHomeCtrl.$injector = ['consumerSearchService', '$scope'];
     function ConsumerHomeCtrl(consumerSearchService, $scope) {
         var ctrl = this;
-        ctrl.isSearching = consumerSearchService.mlSearch;
+        ctrl.search = consumerSearchService.mlSearch;
 
 
         $scope.$watch(function() { return consumerSearchService.isSearching}, function(newVal,oldVal) {

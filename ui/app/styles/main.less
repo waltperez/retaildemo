@@ -177,3 +177,29 @@ form[name=profileForm] {
   margin-top: 10px;
   margin-right: 5px;
 }
+
+.product-result {
+  display: inline-block;
+  vertical-align: top;
+  height: 200px;
+  overflow: hidden;
+  width: 30%;
+  margin: 0.5%;
+
+  .thumbnail {
+    border-radius: 0; height: 100%; position: relative;
+
+    .thumbnail-wrapper { width: auto; height: 65%; position: relative; }
+    img {
+      max-height: 90%;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -50%)
+    }
+
+    .caption { position: absolute; bottom: 1%; font-weight: bold; text-align: center }
+  }
+}
