@@ -621,12 +621,35 @@ angular.module('sample.common', [])
     ConsumerHomeCtrl.$injector = ['consumerSearchService', '$scope'];
     function ConsumerHomeCtrl(consumerSearchService, $scope) {
         var ctrl = this;
-        ctrl.isSearching = consumerSearchService.mlSearch;
+        ctrl.mlSearch = consumerSearchService.mlSearch;
+        ctrl.page = ctrl.mlSearch.getPage();
 
 
-        $scope.$watch(function() { return consumerSearchService.isSearching}, function(newVal,oldVal) {
+        $scope.$watch(function() { return consumerSearchService.isSearching; }, function(newVal,oldVal) {
           ctrl.isSearching = newVal;
         });
+
+        $scope.$watch(function() { return consumerSearchService.results; }, function(newVal, oldVal) {
+          ctrl.page = ctrl.mlSearch.getPage();
+          ctrl.results = consumerSearchService.results;
+        });
+
+        ctrl.search = function() {
+
+            console.log('searching page %s', ctrl.page);
+            ctrl.mlSearch
+              .setPage(ctrl.page);
+
+            consumerSearchService.runSearch();
+        }
+
+
+      ctrl.toggleFacet = function(facetName, value) {
+        ctrl.mlSearch.toggleFacet( facetName, value )
+
+        consumerSearchService.runSearch();
+      }
+
     }
 
 })();
@@ -642,7 +665,7 @@ angular.module('sample.common', [])
       var service = {};
 
       // this will probably end up searching just products
-      service.mlSearch = MLSearchFactory.newContext({});
+      service.mlSearch = MLSearchFactory.newContext({ pageLength: 12 });
 
       service.fromParams = function() {
         service.mlSearch.fromParams().then(service.parseResults);
@@ -657,7 +680,17 @@ angular.module('sample.common', [])
 
       service.searchText = function(t) {
         service.startSearch();
-        service.mlSearch.setText(t).setPage(1).search().then(service.parseResults);
+        service.mlSearch.setText(t).setPage(1);
+        service.runSearch();
+      }
+
+      service.searchPage = function(n) {
+        service.mlSearch.setPage(n);
+        service.runSearch();
+      }
+
+      service.runSearch = function() {
+        service.mlSearch.search().then(service.parseResults);
       }
 
       service.startSearch = function() { service.isSearching = true; }

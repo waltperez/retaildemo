@@ -24,7 +24,17 @@
 
       service.searchText = function(t) {
         service.startSearch();
-        service.mlSearch.setText(t).setPage(1).search().then(service.parseResults);
+        service.mlSearch.setText(t).setPage(1);
+        service.runSearch();
+      }
+
+      service.searchPage = function(n) {
+        service.mlSearch.setPage(n);
+        service.runSearch();
+      }
+
+      service.runSearch = function() {
+        service.mlSearch.search().then(service.parseResults);
       }
 
       service.startSearch = function() { service.isSearching = true; }
