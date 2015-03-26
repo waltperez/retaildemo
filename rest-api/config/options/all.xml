@@ -1,13 +1,13 @@
 <search:options xmlns:search="http://marklogic.com/appservices/search">
   <search:search-option>unfiltered</search:search-option>
   <search:page-length>10</search:page-length>
-  <search:additional-query>
-    <cts:not-query xmlns:cts="http://marklogic.com/cts">
-      <cts:directory-query>
-        <cts:uri>/users/</cts:uri>
-      </cts:directory-query>
-    </cts:not-query>
-  </search:additional-query>
+    <search:additional-query>
+        <cts:and-query xmlns:cts="http://marklogic.com/cts">
+            <cts:collection-query>
+                <cts:uri>reports</cts:uri>
+            </cts:collection-query>
+        </cts:and-query>
+    </search:additional-query>
   <search:term apply="term">
     <search:empty apply="all-results"/>
     <search:term-option>punctuation-insensitive</search:term-option>
