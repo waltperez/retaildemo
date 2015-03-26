@@ -141,7 +141,10 @@
             <search:element ns="" name="productTemplate"/>
         </search:range>
     </search:constraint>
-
+    <search:extract-metadata>
+        <search:qname elem-ns="" elem-name="name"/>
+        <search:qname elem-ns="" elem-name="url"/>
+    </search:extract-metadata>
   <!-- example facet constraint below -->
   <!--
   <search:constraint name="myconstraint">
