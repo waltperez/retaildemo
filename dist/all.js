@@ -621,7 +621,7 @@ angular.module('sample.common', [])
     ConsumerHomeCtrl.$injector = ['consumerSearchService', '$scope'];
     function ConsumerHomeCtrl(consumerSearchService, $scope) {
         var ctrl = this;
-        ctrl.search = consumerSearchService.mlSearch;
+        ctrl.isSearching = consumerSearchService.mlSearch;
 
 
         $scope.$watch(function() { return consumerSearchService.isSearching}, function(newVal,oldVal) {
@@ -642,7 +642,7 @@ angular.module('sample.common', [])
       var service = {};
 
       // this will probably end up searching just products
-      service.mlSearch = MLSearchFactory.newContext({ pageLength: 12 });
+      service.mlSearch = MLSearchFactory.newContext({});
 
       service.fromParams = function() {
         service.mlSearch.fromParams().then(service.parseResults);

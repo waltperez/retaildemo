@@ -1,12 +1,12 @@
 <div class="row">
   <div class="col-sm-2">
-    <ml-facets facets="consumerCtrl.search.facets" toggle="consumerCtrl.toggleFacet(facet, value)"></ml-facets>
+    <ml-facets facets="consumerCtrl.search.results.facets" toggle="consumerCtrl.toggleFacet(facet, value)"></ml-facets>
   </div>
 
   <div class="col-sm-10">
     <div ng-show="consumerCtrl.isSearching">Searching...</div>
     <div ng-if="consumerCtrl.search && consumerCtrl.search.results.total > 0">
-      <ml-metrics search="consumerCtrl.search"></ml-metrics>
+      <ml-metrics search="consumerCtrl.search.results"></ml-metrics>
       <ml-results results="consumerCtrl.search.results" template="/consumer/consumer_search_results.html"></ml-results>
     </div>
     <div ng-if="consumerCtrl.noResults">
