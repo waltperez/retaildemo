@@ -5,7 +5,7 @@
 
   <div class="col-sm-10">
     <div ng-show="consumerCtrl.isSearching">Searching...</div>
-    <div ng-if="consumerCtrl.results && consumerCtrl.results.total > 0">
+    <div ng-if="consumerCtrl.results && consumerCtrl.results.total > 0"  class="product-results">
       <ml-metrics search="consumerCtrl.results"></ml-metrics>
       <ml-results results="consumerCtrl.results" template="/consumer/consumer_search_results.html"></ml-results>
       <pagination ng-model="consumerCtrl.page" ng-change="consumerCtrl.search()" max-size="10" boundary-links="true"
