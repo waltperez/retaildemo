@@ -60,6 +60,17 @@ angular.module('ml.retail', [
         templateUrl: '/consumer/consumer_home.html',
         controller: 'consumerHomeCtrl as consumerCtrl'
       })
+      .when('/consumer/detail/:uri*', {
+        templateUrl: '/consumer/product_detail.html',
+        controller: 'productDetailCtrl as productDetails',
+        resolve: {
+          'productData': function($route, MLRest) {
+            var uri = '/' + $route.current.params.uri;
+            console.log('resolving ', uri)
+            return MLRest.getDocument(uri, { format: 'json', transform: 'to-json'})
+          }
+        }
+      })
       .otherwise({
         redirectTo: '/consumer/home'
       });
