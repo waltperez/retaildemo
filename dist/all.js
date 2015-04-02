@@ -67,7 +67,7 @@ angular.module('ml.retail', [
           'productData': function($route, MLRest) {
             var uri = '/' + $route.current.params.uri;
             console.log('resolving ', uri)
-            return MLRest.getDocument(uri, { format: 'json', transform: 'to-json'})
+            return MLRest.getDocument(uri, { format: 'json', transform: 'product-json'})
           }
         }
       })
@@ -746,7 +746,7 @@ angular.module('sample.common', [])
     function ProductDetailCtrl(productData) {
       var ctrl = this;
 
-      ctrl.data = productData;
+      ctrl.data = productData.data;
     }
 })();
 
