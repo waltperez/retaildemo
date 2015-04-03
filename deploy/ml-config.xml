@@ -291,14 +291,21 @@
 -->
           <range-path-index>
               <scalar-type>string</scalar-type>
-              <collation>http://marklogic.com/collation/codepoint</collation>
+              <collation>http://marklogic.com/collation/en/S1</collation>
               <path-expression>/product/accessories/sku</path-expression>
               <range-value-positions>false</range-value-positions>
               <invalid-values>reject</invalid-values>
           </range-path-index>
           <range-path-index>
               <scalar-type>string</scalar-type>
-              <collation>http://marklogic.com/collation/codepoint</collation>
+              <collation>http://marklogic.com/collation/en/S1</collation>
+              <path-expression>/product/sku</path-expression>
+              <range-value-positions>false</range-value-positions>
+              <invalid-values>reject</invalid-values>
+          </range-path-index>
+          <range-path-index>
+              <scalar-type>string</scalar-type>
+              <collation>http://marklogic.com/collation/en/S1</collation>
               <path-expression>/product/relatedProducts/sku</path-expression>
               <range-value-positions>false</range-value-positions>
               <invalid-values>reject</invalid-values>

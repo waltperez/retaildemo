@@ -68,7 +68,30 @@
       <search:element ns="http://marklogic.com/xdmp/json/basic" name="eyeColor"/>
     </search:range>
   </search:constraint>
-
+    <search:constraint name="product-sku">
+        <search:facet-option>frequency-order</search:facet-option>
+        <search:facet-option>descending</search:facet-option>
+        <search:facet-option>limit=10</search:facet-option>
+        <search:range collation="http://marklogic.com/collation/en/S1" type="xs:string" facet="true">
+            <search:path-index>/product/sku</search:path-index>
+        </search:range>
+    </search:constraint>
+    <search:constraint name="related-product-sku">
+        <search:facet-option>frequency-order</search:facet-option>
+        <search:facet-option>descending</search:facet-option>
+        <search:facet-option>limit=10</search:facet-option>
+        <search:range collation="http://marklogic.com/collation/en/S1" type="xs:string" facet="true">
+            <search:path-index>/product/relatedProducts/sku</search:path-index>
+        </search:range>
+    </search:constraint>
+    <search:constraint name="product-accessories-sku">
+        <search:facet-option>frequency-order</search:facet-option>
+        <search:facet-option>descending</search:facet-option>
+        <search:facet-option>limit=10</search:facet-option>
+        <search:range collation="http://marklogic.com/collation/en/S1" type="xs:string" facet="true">
+            <search:path-index>/product/accessories/sku</search:path-index>
+        </search:range>
+    </search:constraint>
     <search:constraint name="productId">
         <search:range type="xs:string" facet="true" collation="http://marklogic.com/collation/codepoint">
             <search:facet-option>limit=5</search:facet-option>
