@@ -17,19 +17,12 @@ angular.module('ml.retail', [
       userService.logout();
     };
 
-    $scope.$watch(function() { return userService.user; }, function(newVal,oldVal) {
-      if (newVal) {
-        ctrl.username = newVal.username;
-      } else {
-        ctrl.username = null;
-        $location.path('/').search('');
-      }
-    });
 
   }])
   .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
     $locationProvider.html5Mode(true);
+    $locationProvider.hashPrefix('!');
 
     $routeProvider
       .when('/splash', {
@@ -74,7 +67,10 @@ angular.module('ml.retail', [
       .otherwise({
         redirectTo: '/consumer/home'
       });
-  }]);
+  }]).run(['$route', '$location', function($route, $location)  {
+  console.log('route', $route, $location)
+  $route.reload();
+}]);
 
 
 angular.module('sample.common', [])
@@ -747,6 +743,10 @@ angular.module('sample.common', [])
       var ctrl = this;
 
       ctrl.data = productData.data;
+
+      ctrl.imageStyle = {
+        backgroundImage: 'url(' + ctrl.data.largeFrontImage + ')'
+      }
     }
 })();
 

@@ -1,7 +1,22 @@
-<div class="row product-details">
-  {{ productDetails }}
-  <div class="col-sm-12">
-    <div class="product-image"><img ng-src="{{ productDetails.data.image._children[0]"></div>
-    <div class="product-title"><h3>{{ productDetails.data.name._children[0]}}</h3></div>
+<div class="product-details">
+
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="product-image" ng-style="productDetails.imageStyle"></div>
+    </div>
+    <div class="col-sm-9">
+      <div class="product-title"><h3>{{ productDetails.data.name }}</h3></div>
+      <div class="product-price">{{ productDetails.data.price }}</div>
+      <div class="product-summary">{{ productDetails.data.summary }}</div>
+      <div class="product-extras">
+        <dl class="ui-sections">
+          <dt class="tab">Description</dt>
+          <dd>{{ productDetails.data.description }}</dd>
+          <dt class="tab">Reviews</dt>
+          <dd>reviews here</dd>
+        </dl>
+      </div>
+    </div>
   </div>
+
 </div>

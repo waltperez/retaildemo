@@ -8,5 +8,9 @@
       var ctrl = this;
 
       ctrl.data = productData.data;
+
+      ctrl.imageStyle = {
+        backgroundImage: 'url(' + ctrl.data.largeFrontImage + ')'
+      }
     }
 })();

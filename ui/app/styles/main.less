@@ -1,12 +1,14 @@
 @import "../bower_components/bootstrap/less/bootstrap.less";
 @import "../bower_components/font-awesome/less/font-awesome.less";
 @import "../bower_components/roboto-fontface/roboto-fontface.less";
+@import "../bower_components/lato/less/lato.less";
 @icon-font-path:  "/fonts/";
 @FontAwesomePath:    "/fonts/";
-@roboto-font-path: '/fonts/';
+@roboto-font-path: '/bower_components/roboto-fontface/fonts';
+@lato-font-path: '/bower_components/lato/font';
 
 html { height: 100%; }
-body { background: #CCC; font-family: 'Roboto', 'Comic Sans', serif; height: 100%; }
+body { background: #ddd; font-family: 'Roboto', sans-serif; height: 100%; }
 
 
 .navbar {
@@ -252,4 +254,38 @@ form[name=profileForm] {
     }
     div { padding: 5px 12px; }
   }
+}
+
+.product-details {
+
+    .product-image {
+      width: 100%;
+      height: 300px;
+      background-position-x: 50%;
+      background-size: contain;
+      background-repeat: no-repeat;
+      float: left;
+      margin-right: 15px;
+      background-color: #ddd;
+      background-blend-mode: multiply;
+    }
+
+    .product-price {
+      font-size: 24px; font-weight: bold; color: #ea1213; margin-bottom: 15px;
+
+      &:before { content: '$' }
+    }
+
+    .product-title h3 {
+      font-size: 28px;
+      margin: 15px 0 15px 0;
+    }
+
+    .product-summary { font-size: 16px; margin-bottom: 30px }
+}
+
+.ui-sections {
+  dt { background: #333; color: #FFF; padding: 10px 15px; margin-top: 30px; }
+  dt:first-of-type { margin-top: 0 }
+  dd { background: #FFF; padding: 15px; }
 }

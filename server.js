@@ -12,6 +12,8 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var expressSession = require('express-session');
 var http = require('http');
+var path = require('path');
+var appRoot = path.join(__dirname, 'ui/app');
 
 function getAuth(options, session) {
   'use strict';
@@ -203,9 +205,12 @@ exports.buildExpress = function(options) {
     }
   });
 
-  // Redirect all other traffic to Angular
-  app.use(express.static(__dirname + '/ui/app'));
-  app.use('/*', express.static(__dirname + '/ui/app'));
+  app.use(express.static(appRoot));
+
+  app.all('*', function(req, res, next) {
+      // Just send the index.html for other files to support HTML5Mode
+      res.sendfile(path.join(appRoot, 'index.html'));
+  });
 
   return app;
 };
