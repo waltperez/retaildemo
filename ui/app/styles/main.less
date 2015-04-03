@@ -149,7 +149,7 @@ aside#sidenav {
   margin-top: 14px;
 }
 
-.facet-list .facet { height: 160px; overflow: hidden; margin: 15px 0;}
+.facet-list .facet { max-height: 160px; overflow: hidden; margin: 15px 0;}
 
 .facet-list .facet a {
   cursor: pointer;
@@ -191,6 +191,8 @@ form[name=profileForm] {
     .result-count {
       display: block;
       padding: 10px;
+
+      .search-text { display: inline-block; padding: 2px 6px; background: #333; color: #FFF; cursor: pointer }
     }
 
     .search-tag { margin-left: 7px; .fa { margin-right: 7px; }}
