@@ -38,18 +38,54 @@
       }
 
       service.clearSearch = function() {
-
+        service.mlSearch.setText('').setPage(1).clearAdditionalQueries();
       }
 
       service.startSearch = function() { service.isSearching = true; }
 
+      service.searchTags = [];
+      function buildSearchTags() {
+        service.mlSearch.clearAdditionalQueries();
+        for (var i=0; i < service.searchTags.length; i++) {
+          var tag = service.searchTags[i];
+          service.mlSearch.addAdditionalQuery({
+            'container-query': {
+              'element': {
+                'name': 'detail'
+              },
+              'and-query': {
+                'queries': [{
+                  'word-query': {
+                    'element': {
+                      'name': 'name'
+                    },
+                    'text': tag.name
+                  }},{
+                  'word-query': {
+                    'element': {
+                      'name': 'value'
+                    },
+                    'text': tag.value
+                  }
+                }]
+              }
+            }
+          });
+        }
+      }
+
+
       service.searchTag = function(name,value,append) {
         if (!append) {
-          service.tags = [];
+          service.searchTags = [];
         }
-        service.tags.push({ name: name, value: value });
-        service.mlSearch.clearAdditionalQueries();
-
+        service.searchTags.push({ name: name, value: value });
+        buildSearchTags();
+        service.runSearch();
+      }
+      service.removeSearchTag = function(index) {
+        service.searchTags.splice(index,1);
+        buildSearchTags();
         service.runSearch();
       }
 

@@ -19,12 +19,15 @@
             <div class="tab-content" ng-switch-when="description"><p>{{ productDetails.data.description }}</p></div>
             <div class="tab-content" ng-switch-when="features">
               <ul class="product-features">
-                <li ng-repeat="feature in productDetails.data.features" class="product-feature"><strong>{{ feature.name }}</strong> {{ feature.value }}</li>
+               <li ng-repeat="feature in productDetails.data.features" ng-init="isSelected = productDetails.isFeatureSearch(feature)" class="product-feature" ng-class="{ selected: isSelected }"><strong>{{ feature.name }}</strong> <a ng-if="!isSelected" class="search-tag" ng-click="productDetails.clickTag(feature)">{{ feature.value }}</a> <span class="search-tag-selected" ng-if="isSelected"> {{ feature.value }}</span></li>
               </ul>
             </div>
             <div class="tab-content" ng-switch-when="reviews">
               <ul class="product-reviews">
-                <li ng-repeat="review in productDetails.data.reviews" class="product-review"><strong>{{ review.reviewer }}</strong> {{ review.comment }}</li>
+                <li ng-repeat="review in productDetails.data.reviews" class="product-review">
+                  <div class="reviewer"><strong>{{ review.reviewer }}</strong></div>
+                  <div class="comment">{{ review.comment }}</div>
+                </li>
               </ul>
             </div>
           </div>
