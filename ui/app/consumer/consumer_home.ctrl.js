@@ -15,6 +15,7 @@
         });
 
         $scope.$watch(function() { return consumerSearchService.results; }, function(newVal, oldVal) {
+          ctrl.qtext = ctrl.qtext;
           ctrl.page = ctrl.mlSearch.getPage();
           ctrl.results = consumerSearchService.results;
         });

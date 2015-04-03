@@ -8,6 +8,8 @@
       var ctrl = this;
 
       ctrl.data = productData.data;
+      ctrl.currentTab = 'description';
+      ctrl.showTab = function(t) { ctrl.currentTab = t; }
 
       ctrl.imageStyle = {
         backgroundImage: 'url(' + ctrl.data.largeFrontImage + ')'

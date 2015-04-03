@@ -149,6 +149,8 @@ aside#sidenav {
   margin-top: 14px;
 }
 
+.facet-list .facet { height: 160px; overflow: hidden; margin: 15px 0;}
+
 .facet-list .facet a {
   cursor: pointer;
 }
@@ -251,6 +253,7 @@ form[name=profileForm] {
         background: linear-gradient(to bottom,  rgba(255,48,25,1) 0%,rgba(207,4,4,1) 100%); /* W3C */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3019', endColorstr='#cf0404',GradientType=0 ); /* IE6-9 */
         font-size: 14px; padding: 12px; color: #FFF;
+        margin: 0;
     }
     div { padding: 5px 12px; }
   }
@@ -285,8 +288,9 @@ form[name=profileForm] {
     .product-summary { font-size: 16px; margin-bottom: 30px }
 }
 
-.ui-sections {
-  dt { background: #333; color: #FFF; padding: 10px 15px; margin-top: 30px; }
-  dt:first-of-type { margin-top: 0 }
-  dd { background: #FFF; padding: 15px; }
+.ui-tabs {
+  .tab { display: inline-block; padding: 10px 15px; color: #FFF; background: #333; text-decoration: none; cursor: pointer; &:hover { background: #999; } }
+  .tab.active { background: #FFF; color: #333 }
+
+  .tab-content { background: #FFF; padding: 15px }
 }

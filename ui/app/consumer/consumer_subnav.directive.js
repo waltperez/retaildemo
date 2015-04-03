@@ -13,6 +13,7 @@
           scope.doSearch = function() {
             if (scope.searchForm.$valid) {
               consumerSearchService.searchText(scope.searchText);
+              scope.searchText = '';
             } else {
               console.log('invalid');
             }

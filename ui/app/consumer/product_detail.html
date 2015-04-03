@@ -9,12 +9,26 @@
       <div class="product-price">{{ productDetails.data.price }}</div>
       <div class="product-summary">{{ productDetails.data.summary }}</div>
       <div class="product-extras">
-        <dl class="ui-sections">
-          <dt class="tab">Description</dt>
-          <dd>{{ productDetails.data.description }}</dd>
-          <dt class="tab">Reviews</dt>
-          <dd>reviews here</dd>
-        </dl>
+        <div class="ui-tabs">
+          <div class="tab-tabs">
+            <a class="tab" ng-click="productDetails.showTab('description')" ng-class="{active: productDetails.currentTab === 'description'}">Description</a>
+            <a class="tab" ng-click="productDetails.showTab('features')" ng-class="{active: productDetails.currentTab === 'features'}">Features</a>
+            <a class="tab" ng-click="productDetails.showTab('reviews')" ng-class="{active: productDetails.currentTab === 'reviews'}">Reviews ({{ productDetails.data.reviews.length }})</a>
+          </div>
+          <div ng-switch="productDetails.currentTab">
+            <div class="tab-content" ng-switch-when="description"><p>{{ productDetails.data.description }}</p></div>
+            <div class="tab-content" ng-switch-when="features">
+              <ul class="product-features">
+                <li ng-repeat="feature in productDetails.data.features" class="product-feature"><strong>{{ feature.name }}</strong> {{ feature.value }}</li>
+              </ul>
+            </div>
+            <div class="tab-content" ng-switch-when="reviews">
+              <ul class="product-reviews">
+                <li ng-repeat="review in productDetails.data.reviews" class="product-review"><strong>{{ review.reviewer }}</strong> {{ review.comment }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

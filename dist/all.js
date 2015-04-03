@@ -72,6 +72,154 @@ angular.module('ml.retail', [
   $route.reload();
 }]);
 
+(function () {
+
+    var app = angular.module('ml.retail')
+    app.controller('consumerHomeCtrl', ConsumerHomeCtrl);
+
+    ConsumerHomeCtrl.$injector = ['consumerSearchService', '$scope'];
+    function ConsumerHomeCtrl(consumerSearchService, $scope) {
+        var ctrl = this;
+        ctrl.mlSearch = consumerSearchService.mlSearch;
+        ctrl.page = ctrl.mlSearch.getPage();
+
+
+        $scope.$watch(function() { return consumerSearchService.isSearching; }, function(newVal,oldVal) {
+          ctrl.isSearching = newVal;
+        });
+
+        $scope.$watch(function() { return consumerSearchService.results; }, function(newVal, oldVal) {
+          ctrl.qtext = ctrl.qtext;
+          ctrl.page = ctrl.mlSearch.getPage();
+          ctrl.results = consumerSearchService.results;
+        });
+
+        ctrl.search = function() {
+
+            console.log('searching page %s', ctrl.page);
+            ctrl.mlSearch
+              .setPage(ctrl.page);
+
+            consumerSearchService.runSearch();
+        }
+
+
+      ctrl.toggleFacet = function(facetName, value) {
+        ctrl.mlSearch.toggleFacet( facetName, value )
+
+        consumerSearchService.runSearch();
+      }
+
+    }
+
+})();
+
+(function () {
+    var app = angular.module('ml.retail');
+
+    app.factory('consumerSearchService', ConsumerSearchService);
+
+    ConsumerSearchService.$inject = ['MLSearchFactory'];
+    function ConsumerSearchService(MLSearchFactory) {
+
+      var service = {};
+
+      // this will probably end up searching just products
+      service.mlSearch = MLSearchFactory.newContext({ pageLength: 12 });
+
+      service.fromParams = function() {
+        service.mlSearch.fromParams().then(service.parseResults);
+      }
+
+      service.parseResults = function(data) {
+        service.isSearching = false;
+        service.qtext = service.mlSearch.getText();
+        service.page = service.mlSearch.getPage();
+        service.results = data;
+      }
+
+      service.searchText = function(t) {
+        service.startSearch();
+        service.mlSearch.setText(t).setPage(1);
+        service.runSearch();
+      }
+
+      service.searchPage = function(n) {
+        service.mlSearch.setPage(n);
+        service.runSearch();
+      }
+
+      service.runSearch = function() {
+        service.mlSearch.search().then(service.parseResults);
+      }
+
+      service.clearSearch = function() {
+
+      }
+
+      service.startSearch = function() { service.isSearching = true; }
+
+      service.searchTag = function(name,value,append) {
+        if (!append) {
+          service.tags = [];
+        }
+        service.tags.push({ name: name, value: value });
+        service.mlSearch.clearAdditionalQueries();
+
+        service.runSearch();
+      }
+
+
+      return service;
+
+    }
+})();
+
+(function () {
+    var app = angular.module('ml.retail');
+
+    app.directive('consumerSubnav', ConsumerSubnav);
+
+    ConsumerSubnav.$injector = ['consumerSearchService']
+    function ConsumerSubnav(consumerSearchService) {
+      return {
+        restrict: 'E',
+        replace: true,
+        link: function(scope) {
+          scope.searchText = '';
+          scope.doSearch = function() {
+            if (scope.searchForm.$valid) {
+              consumerSearchService.searchText(scope.searchText);
+              scope.searchText = '';
+            } else {
+              console.log('invalid');
+            }
+          }
+        },
+        templateUrl: '/consumer/consumer_subnav.html'
+      }
+    }
+})();
+
+(function () {
+    var app = angular.module('ml.retail');
+
+    app.controller('productDetailCtrl', ProductDetailCtrl);
+
+    ProductDetailCtrl.$injector = ['productData'];
+    function ProductDetailCtrl(productData) {
+      var ctrl = this;
+
+      ctrl.data = productData.data;
+      ctrl.currentTab = 'description';
+      ctrl.showTab = function(t) { ctrl.currentTab = t; }
+
+      ctrl.imageStyle = {
+        backgroundImage: 'url(' + ctrl.data.largeFrontImage + ')'
+      }
+    }
+})();
+
 
 angular.module('sample.common', [])
   .filter('object2Array', function() {
@@ -619,136 +767,6 @@ angular.module('sample.common', [])
     };
   }]);
 }());
-
-(function () {
-
-    var app = angular.module('ml.retail')
-    app.controller('consumerHomeCtrl', ConsumerHomeCtrl);
-
-    ConsumerHomeCtrl.$injector = ['consumerSearchService', '$scope'];
-    function ConsumerHomeCtrl(consumerSearchService, $scope) {
-        var ctrl = this;
-        ctrl.mlSearch = consumerSearchService.mlSearch;
-        ctrl.page = ctrl.mlSearch.getPage();
-
-
-        $scope.$watch(function() { return consumerSearchService.isSearching; }, function(newVal,oldVal) {
-          ctrl.isSearching = newVal;
-        });
-
-        $scope.$watch(function() { return consumerSearchService.results; }, function(newVal, oldVal) {
-          ctrl.page = ctrl.mlSearch.getPage();
-          ctrl.results = consumerSearchService.results;
-        });
-
-        ctrl.search = function() {
-
-            console.log('searching page %s', ctrl.page);
-            ctrl.mlSearch
-              .setPage(ctrl.page);
-
-            consumerSearchService.runSearch();
-        }
-
-
-      ctrl.toggleFacet = function(facetName, value) {
-        ctrl.mlSearch.toggleFacet( facetName, value )
-
-        consumerSearchService.runSearch();
-      }
-
-    }
-
-})();
-
-(function () {
-    var app = angular.module('ml.retail');
-
-    app.factory('consumerSearchService', ConsumerSearchService);
-
-    ConsumerSearchService.$inject = ['MLSearchFactory'];
-    function ConsumerSearchService(MLSearchFactory) {
-
-      var service = {};
-
-      // this will probably end up searching just products
-      service.mlSearch = MLSearchFactory.newContext({ pageLength: 12 });
-
-      service.fromParams = function() {
-        service.mlSearch.fromParams().then(service.parseResults);
-      }
-
-      service.parseResults = function(data) {
-        service.isSearching = false;
-        service.results = data;
-        service.qtext = service.mlSearch.getText();
-        service.page = service.mlSearch.getPage();
-      }
-
-      service.searchText = function(t) {
-        service.startSearch();
-        service.mlSearch.setText(t).setPage(1);
-        service.runSearch();
-      }
-
-      service.searchPage = function(n) {
-        service.mlSearch.setPage(n);
-        service.runSearch();
-      }
-
-      service.runSearch = function() {
-        service.mlSearch.search().then(service.parseResults);
-      }
-
-      service.startSearch = function() { service.isSearching = true; }
-
-
-      return service;
-
-    }
-})();
-
-(function () {
-    var app = angular.module('ml.retail');
-
-    app.directive('consumerSubnav', ConsumerSubnav);
-
-    ConsumerSubnav.$injector = ['consumerSearchService']
-    function ConsumerSubnav(consumerSearchService) {
-      return {
-        restrict: 'E',
-        replace: true,
-        link: function(scope) {
-          scope.searchText = '';
-          scope.doSearch = function() {
-            if (scope.searchForm.$valid) {
-              consumerSearchService.searchText(scope.searchText);
-            } else {
-              console.log('invalid');
-            }
-          }
-        },
-        templateUrl: '/consumer/consumer_subnav.html'
-      }
-    }
-})();
-
-(function () {
-    var app = angular.module('ml.retail');
-
-    app.controller('productDetailCtrl', ProductDetailCtrl);
-
-    ProductDetailCtrl.$injector = ['productData'];
-    function ProductDetailCtrl(productData) {
-      var ctrl = this;
-
-      ctrl.data = productData.data;
-
-      ctrl.imageStyle = {
-        backgroundImage: 'url(' + ctrl.data.largeFrontImage + ')'
-      }
-    }
-})();
 
 (function () {
 

@@ -17,9 +17,9 @@
 
       service.parseResults = function(data) {
         service.isSearching = false;
-        service.results = data;
         service.qtext = service.mlSearch.getText();
         service.page = service.mlSearch.getPage();
+        service.results = data;
       }
 
       service.searchText = function(t) {
@@ -37,7 +37,21 @@
         service.mlSearch.search().then(service.parseResults);
       }
 
+      service.clearSearch = function() {
+
+      }
+
       service.startSearch = function() { service.isSearching = true; }
+
+      service.searchTag = function(name,value,append) {
+        if (!append) {
+          service.tags = [];
+        }
+        service.tags.push({ name: name, value: value });
+        service.mlSearch.clearAdditionalQueries();
+
+        service.runSearch();
+      }
 
 
       return service;
