@@ -89,6 +89,11 @@
             <search:path-index>/product/details/detail/name</search:path-index>
         </search:range>
     </search:constraint>
+    <search:constraint name="typeahead-name">
+        <search:range collation="http://marklogic.com/collation/en/S1" type="xs:string" facet="false">
+            <search:path-index>/product/name</search:path-index>
+        </search:range>
+    </search:constraint>
     <search:constraint name="product-accessories-sku">
         <search:facet-option>frequency-order</search:facet-option>
         <search:facet-option>descending</search:facet-option>
@@ -185,7 +190,11 @@
     </search:range>
   </search:constraint>
   -->
-
+    <search:tuples name="typeahead">
+        <search:range type="xs:string" collation="http://marklogic.com/collation/en/S1">
+            <search:path-index>/product/name/</search:path-index>
+        </search:range>
+    </search:tuples>
   <!-- example suggestion-source below -->
   <!--
   <search:suggestion-source ref="myconstraint">

@@ -5,3 +5,4 @@ local.properties
 *.pid
 *.idea/
 deploy/
+gulpfile.js
