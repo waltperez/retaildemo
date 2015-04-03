@@ -23,6 +23,16 @@ function productJson(context, params, content)
 
     prod = mapJson(jsonMap, node);
 
+    // map the features
+    prod.features = [];
+    var features = Array.prototype.slice.call(content.getElementsByTagName('detail'));
+    for (var i = 0; i < features.length; i++) {
+      var feature = features[i];
+      prod.features.push(
+        mapJson({ name: './name/text()', value: './value/text()'}, feature)
+      );
+    }
+
 
     return prod;
 };
