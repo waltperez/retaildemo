@@ -3,8 +3,8 @@
 
     app.factory('consumerSearchService', ConsumerSearchService);
 
-    ConsumerSearchService.$inject = ['MLSearchFactory'];
-    function ConsumerSearchService(MLSearchFactory) {
+    ConsumerSearchService.$inject = ['MLSearchFactory','$http'];
+    function ConsumerSearchService(MLSearchFactory,$http) {
 
       var service = {};
 
@@ -88,6 +88,23 @@
         buildSearchTags();
         service.runSearch();
       }
+
+
+      service.autoSuggest = function(val) {
+        console.log("Entered autoSuggest function");
+        return $http.get("http://localhost:8080/TestWeb/users", {
+          params : {
+            username : val
+          }
+        }).then(function(res) {
+          var users = [];
+          angular.forEach(res.data, function(item) {
+            users.push(item.UserName);
+          });
+          return users;
+        });
+      };
+
 
 
       return service;

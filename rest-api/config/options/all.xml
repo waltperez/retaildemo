@@ -110,6 +110,11 @@
             <search:element ns="" name="productId"/>
         </search:range>
     </search:constraint>
+    <search:constraint name="name">
+        <search:range type="xs:string" facet="false" collation="http://marklogic.com/collation/codepoint">
+            <search:element ns="" name="name"/>
+        </search:range>
+    </search:constraint>
     <search:constraint name="type">
         <search:range type="xs:string" facet="true" collation="http://marklogic.com/collation/codepoint">
             <search:facet-option>limit=5</search:facet-option>
@@ -191,10 +196,11 @@
   </search:constraint>
   -->
     <search:tuples name="typeahead">
-        <search:range type="xs:string" collation="http://marklogic.com/collation/en/S1">
-            <search:path-index>/product/name/</search:path-index>
+        <search:range type="xs:string" collation="http://marklogic.com/collation/codepoint">
+            <search:element ns="" name="name"/>
         </search:range>
     </search:tuples>
+
   <!-- example suggestion-source below -->
   <!--
   <search:suggestion-source ref="myconstraint">

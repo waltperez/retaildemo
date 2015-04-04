@@ -165,12 +165,12 @@
         </fragment-parent>
       </fragment-parents>
 -->
-<!--
+
       <fields>
         <field>
-          <field-name></field-name>
+          <field-name>prod-name</field-name>
           <field-path>
-            <path>some/xpath</path>
+            <path>/product/name</path>
             <weight>1.0</weight>
           </field-path>
           <word-lexicons/>
@@ -182,37 +182,38 @@
           <fast-case-sensitive-searches>true</fast-case-sensitive-searches>
           <fast-diacritic-sensitive-searches>true</fast-diacritic-sensitive-searches>
         </field>
-        <field>
-          <field-name/>
-          <include-root>true</include-root>
-          <fast-case-sensitive-searches>false</fast-case-sensitive-searches>
-          <fast-diacritic-sensitive-searches>false</fast-diacritic-sensitive-searches>
-          <fast-phrase-searches>false</fast-phrase-searches>
-          <one-character-searches>false</one-character-searches>
-          <stemmed-searches>basic</stemmed-searches>
-          <three-character-searches>false</three-character-searches>
-          <three-character-word-positions>false</three-character-word-positions>
-          <trailing-wildcard-searches>false</trailing-wildcard-searches>
-          <trailing-wildcard-word-positions>false</trailing-wildcard-word-positions>
-          <two-character-searches>false</two-character-searches>
-          <value-positions>false</value-positions>
-          <value-searches>false</value-searches>
-          <word-searches>false</word-searches>
-          <word-lexicons/>
-          <included-elements>
-            <included-element>
-              <namespace-uri>http://ns.com</namespace-uri>
-              <localname>blah</localname>
-              <weight>1.0</weight>
-              <attribute-namespace-uri/>
-              <attribute-localname/>
-              <attribute-value/>
-            </included-element>
-          </included-elements>
-          <excluded-elements/>
-        </field>
+          <field>
+              <field-name>prod-desc</field-name>
+              <field-path>
+                  <path>/product/shortDescription</path>
+                  <weight>1.0</weight>
+              </field-path>
+              <word-lexicons/>
+              <included-elements/>
+              <excluded-elements/>
+              <tokenizer-overrides/>
+              <stemmed-searches>basic</stemmed-searches>
+              <fast-phrase-searches>true</fast-phrase-searches>
+              <fast-case-sensitive-searches>true</fast-case-sensitive-searches>
+              <fast-diacritic-sensitive-searches>true</fast-diacritic-sensitive-searches>
+          </field>
+          <field>
+              <field-name>prod-price</field-name>
+              <field-path>
+                  <path>/product/regularPrice</path>
+                  <weight>1.0</weight>
+              </field-path>
+              <word-lexicons/>
+              <included-elements/>
+              <excluded-elements/>
+              <tokenizer-overrides/>
+              <stemmed-searches>basic</stemmed-searches>
+              <fast-phrase-searches>true</fast-phrase-searches>
+              <fast-case-sensitive-searches>true</fast-case-sensitive-searches>
+              <fast-diacritic-sensitive-searches>true</fast-diacritic-sensitive-searches>
+          </field>
       </fields>
--->
+
       <range-element-indexes>
         <range-element-index>
           <scalar-type>string</scalar-type>
@@ -225,7 +226,7 @@
           <range-element-index>
               <scalar-type>string</scalar-type>
               <namespace-uri></namespace-uri>
-              <localname>productId type new active lowPriceGuarantee onSale preowned salesRankLongTerm productTemplate categoryPath freeShipping</localname>
+              <localname>name productId type new active lowPriceGuarantee onSale preowned salesRankLongTerm productTemplate categoryPath freeShipping</localname>
               <collation>http://marklogic.com/collation/codepoint</collation>
               <range-value-positions>false</range-value-positions>
           </range-element-index>
@@ -260,6 +261,23 @@
 -->
       </range-element-attribute-indexes>
       <range-field-indexes>
+          <range-field-index>
+              <scalar-type>string</scalar-type>
+              <field-name>prod-name</field-name>
+              <collation>http://marklogic.com/collation/codepoint</collation>
+              <range-value-positions>false</range-value-positions>
+          </range-field-index>
+          <range-field-index>
+              <scalar-type>string</scalar-type>
+              <field-name>prod-desc</field-name>
+              <collation>http://marklogic.com/collation/codepoint</collation>
+              <range-value-positions>false</range-value-positions>
+          </range-field-index>
+          <range-field-index>
+              <scalar-type>double</scalar-type>
+              <field-name>prod-price</field-name>
+              <range-value-positions>false</range-value-positions>
+          </range-field-index>
 <!--
         <range-field-index>
           <scalar-type>date</scalar-type>

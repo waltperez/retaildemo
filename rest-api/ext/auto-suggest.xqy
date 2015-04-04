@@ -28,12 +28,12 @@ function dmlc:get(
   let $type-ahead:=
     <tuples>{
       json:transform-from-json(cts:value-tuples(
-          (cts:element-reference(xs:QName("KEY_LINK"),"collation=http://marklogic.com/collation/codepoint"),
-          cts:element-reference(xs:QName("NME_LAST"),"collation=http://marklogic.com/collation/codepoint"),
-          cts:element-reference(xs:QName("MKT_VALUE"),"collation=http://marklogic.com/collation/codepoint")
-          ),(),cts:and-query((cts:element-value-query(xs:QName("NME_LAST"), $last-name,"wildcarded"),
-          cts:element-value-query(xs:QName("MKT_VALUE"), $mkt-val,"wildcarded"),
-          cts:element-value-query(xs:QName("KEY_LINK"), $acct-no,"wildcarded")
+          (cts:field-reference("prod-name","collation=http://marklogic.com/collation/codepoint"),
+          cts:field-reference("prod-desc","collation=http://marklogic.com/collation/codepoint"),
+          cts:field-reference("prod-price")
+          ),(),cts:and-query((cts:field-value-query("prod-name", "iph*","wildcarded"),
+          cts:field-value-query("prod-desc", "*","wildcarded"),
+          cts:field-value-query("prod-price", "*","wildcarded")
           ))))
     }</tuples>
 
