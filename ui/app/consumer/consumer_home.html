@@ -10,7 +10,7 @@
         <div class="search-tags">
           <div class="search-tag search-tag-removable" ng-repeat="tag in consumerCtrl.searchService.searchTags" title="remove tag" ng-click="consumerCtrl.removeSearchTag($index)"><span class="fa fa-minus-circle"></span><strong>{{ tag.name }}</strong>: {{ tag.value }}</div>
         </div>
-        <div class="result-count">Your search <span class="search-text" ng-if="consumerCtrl.qtext">for {{ consumerCtrl.qtext }}</span> returned {{ consumerCtrl.results.total }} results</div>
+        <div class="result-count">Your search <span ng-if="consumerCtrl.qtext"> for <span class="search-text" ng-click="consumerCtrl.searchService.searchText('')"><span class="fa fa-minus-circle"></span> {{ consumerCtrl.qtext }}</span></span> returned {{ consumerCtrl.results.total }} results</div>
       </div>
       <ml-results results="consumerCtrl.results" template="/consumer/consumer_search_results.html"></ml-results>
       <pagination ng-model="consumerCtrl.page" ng-change="consumerCtrl.search()" max-size="10" boundary-links="true"
