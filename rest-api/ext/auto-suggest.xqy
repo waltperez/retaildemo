@@ -15,15 +15,13 @@ declare namespace roxy = "http://marklogic.com/roxy";
 (:
  :)
 declare 
-%roxy:params("")
+%roxy:params("qInput=xs:string")
 function dmlc:get(
   $context as map:map,
   $params  as map:map
 ) as document-node()*
 {
-  let $last-name := (map:get($params, "lname") || '*')
-  let $acct-no := (map:get($params, "acctno") || '*')
-  let $mkt-val := (map:get($params, "mktval") || '*')
+  let $query-input := (map:get($params, "qInput") || '*')
 
   let $type-ahead:=
     <tuples>{
@@ -31,7 +29,7 @@ function dmlc:get(
           (cts:field-reference("prod-name","collation=http://marklogic.com/collation/codepoint"),
           cts:field-reference("prod-desc","collation=http://marklogic.com/collation/codepoint"),
           cts:field-reference("prod-price")
-          ),(),cts:and-query((cts:field-value-query("prod-name", "iph*","wildcarded"),
+          ),(),cts:and-query((cts:field-value-query("prod-name", $query-input,"wildcarded"),
           cts:field-value-query("prod-desc", "*","wildcarded"),
           cts:field-value-query("prod-price", "*","wildcarded")
           ))))
