@@ -64,6 +64,11 @@ angular.module('ml.retail', [
           }
         }
       })
+      .when('/consumer/search', {
+        templateUrl: '/consumer/search_form.html',
+        controller: 'searchFormCtrl',
+        controllerAs: 'searchCtrl'
+      })
       .otherwise({
         redirectTo: '/consumer/home'
       });

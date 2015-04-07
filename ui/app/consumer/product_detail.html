@@ -23,12 +23,14 @@
               </ul>
             </div>
             <div class="tab-content" ng-switch-when="reviews">
-              <ul class="product-reviews">
-                <li ng-repeat="review in productDetails.data.reviews" class="product-review">
+              <div class="product-reviews-map"><google-maps map-options="productDetails.mapOptions" markers="productDetails.reviewMarkers"></google-maps></div>
+              <div class="product-reviews">
+                <div ng-repeat="review in productDetails.data.reviews" class="product-review">
                   <div class="reviewer"><strong>{{ review.reviewer }}</strong></div>
                   <div class="comment">{{ review.comment }}</div>
-                </li>
-              </ul>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
