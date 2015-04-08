@@ -44,7 +44,13 @@ function productJson(context, params, content)
       for (var i = 0; i < reviews.length; i++) {
         var review = reviews[i];
         prod.reviews.push(
-          mapJson({ reviewer: './reviewer/name/text()', comment: './comment/text()', 'rating': 'rating/text()'}, review)
+          mapJson({
+            reviewer: './reviewer/name/text()',
+            comment: './comment/text()',
+            rating: 'rating/text()',
+            lat: './reviewer/home[1]/@lat',
+            lng: './reviewer/home[1]/@long'
+          }, review)
         );
       }
     }
