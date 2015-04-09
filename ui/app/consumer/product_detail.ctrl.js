@@ -35,10 +35,12 @@
         var markers = [];
         for (var i = 0; i < ctrl.reviews.shown.length; i++) {
           var r = ctrl.reviews.shown[i];
-          markers.push({
-              latitude: r.lat,
-              longitude: r.lng
-          });
+          if (r.lat && r.lng) {
+            markers.push({
+                latitude: r.lat,
+                longitude: r.lng
+            });
+          }
         }
         ctrl.reviews.markers = markers;
         console.log('markers', ctrl.reviews.markers);
