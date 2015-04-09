@@ -31,9 +31,13 @@
     <search:joiner strength="50" apply="constraint" compare="GE" tokenize="word">GE</search:joiner>
     <search:joiner strength="50" apply="constraint" compare="NE" tokenize="word">NE</search:joiner>
   </search:grammar>
-  <search:sort-order direction="descending">
-    <search:score/>
-  </search:sort-order>
+    <search:operator name="sort">
+        <search:state name="relevance">
+            <search:sort-order>
+                <search:score/>
+            </search:sort-order>
+        </search:state>
+    </search:operator>
   <search:transform-results apply="snippet">
     <search:preferred-elements><search:element ns="" name="body"/></search:preferred-elements>
     <search:max-matches>1</search:max-matches>
@@ -58,6 +62,7 @@
         <search:per-match-tokens>30</search:per-match-tokens>
       </search:transform-results>
     </search:state>
+
   </search:operator>
   <search:annotation xmlns="http://marklogic.com/appservices/search">Delta options here</search:annotation>
   <search:constraint name="eyeColor">
