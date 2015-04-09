@@ -627,6 +627,81 @@ angular.module('sample.common', [])
 
 (function () {
 
+  'use strict';
+
+  var app = angular.module('ml.retail');
+
+  app
+    .controller('splashCtrl', SplashCtrl)
+    .directive('splashChart', SplashChartDirective);
+
+  SplashCtrl.$inject = ['$scope'];
+  function SplashCtrl($scope) {
+
+    var ctrl = this;
+
+    ctrl.chartOptions = {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Stacked column chart'
+        },
+        xAxis: {
+            categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Total fruit consumption'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'John',
+            data: [5, 3, 4, 7, 2]
+        }, {
+            name: 'Jane',
+            data: [2, 2, 3, 2, 1]
+        }, {
+            name: 'Joe',
+            data: [3, 4, 4, 2, 5]
+        }]
+    };
+
+    console.log('chart options', ctrl.chartOptions);
+
+  }
+
+  function SplashChartDirective() {
+    return {
+      restrict: 'A',
+      scope: {
+        'chartOptions': '=',
+        'chartData': '='
+      },
+      link: function(scope,ele) {
+        console.log('splash chart', scope.chartOptions);
+        scope.chart = ele.highcharts(scope.chartOptions);
+
+
+      }
+    };
+  }
+
+
+})();
+
+(function () {
+
     var app = angular.module('ml.retail')
     app.controller('consumerHomeCtrl', ConsumerHomeCtrl);
 
@@ -790,8 +865,8 @@ angular.module('sample.common', [])
 
     app.directive('consumerSubnav', ConsumerSubnav);
 
-    ConsumerSubnav.$injector = ['consumerSearchService']
-    function ConsumerSubnav(consumerSearchService) {
+    ConsumerSubnav.$injector = ['consumerSearchService', '$location']
+    function ConsumerSubnav(consumerSearchService, $location) {
       return {
         restrict: 'E',
         replace: true,
@@ -806,6 +881,7 @@ angular.module('sample.common', [])
             if (scope.searchForm.$valid) {
               consumerSearchService.searchText(scope.searchText);
               scope.searchText = '';
+              $location.path('/consumer/home'); // go to the search results page
             } else {
               console.log('invalid');
             }
@@ -893,81 +969,6 @@ angular.module('sample.common', [])
         backgroundImage: 'url(' + ctrl.data.largeFrontImage + ')'
       }
     }
-})();
-
-(function () {
-
-  'use strict';
-
-  var app = angular.module('ml.retail');
-
-  app
-    .controller('splashCtrl', SplashCtrl)
-    .directive('splashChart', SplashChartDirective);
-
-  SplashCtrl.$inject = ['$scope'];
-  function SplashCtrl($scope) {
-
-    var ctrl = this;
-
-    ctrl.chartOptions = {
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Stacked column chart'
-        },
-        xAxis: {
-            categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Total fruit consumption'
-            }
-        },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
-            shared: true
-        },
-        plotOptions: {
-            column: {
-                stacking: 'percent'
-            }
-        },
-        series: [{
-            name: 'John',
-            data: [5, 3, 4, 7, 2]
-        }, {
-            name: 'Jane',
-            data: [2, 2, 3, 2, 1]
-        }, {
-            name: 'Joe',
-            data: [3, 4, 4, 2, 5]
-        }]
-    };
-
-    console.log('chart options', ctrl.chartOptions);
-
-  }
-
-  function SplashChartDirective() {
-    return {
-      restrict: 'A',
-      scope: {
-        'chartOptions': '=',
-        'chartData': '='
-      },
-      link: function(scope,ele) {
-        console.log('splash chart', scope.chartOptions);
-        scope.chart = ele.highcharts(scope.chartOptions);
-
-
-      }
-    };
-  }
-
-
 })();
 
 (function () {

@@ -35,11 +35,12 @@
   </div>
 </div>
 <div class="row">
-<div ng-repeat="result in results.results" class="product-result">
-  <a class="thumbnail" ng-href="consumer/detail{{ result.uri }}">
-    <div class="thumbnail-wrapper"><img ng-src="{{ result.metadata.image.values[0] }}"></div>
-    <div class="caption"><p class="title">{{ result.metadata.name.values[0] }}</p></div>
-  </a>
-
-</div>
+  <div class="col-sm-12">
+    <div ng-repeat="result in results.results" class="product-result">
+      <a class="thumbnail" ng-href="consumer/detail{{ result.uri }}">
+        <div class="thumbnail-wrapper"><img ng-src="{{ result.metadata.image.values[0] }}"></div>
+        <div class="caption"><p class="title">{{ result.metadata.name.values[0] }}</p></div>
+      </a>
+    </div>
+  </div>
 </div>

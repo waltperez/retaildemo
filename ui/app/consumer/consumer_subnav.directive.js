@@ -3,8 +3,8 @@
 
     app.directive('consumerSubnav', ConsumerSubnav);
 
-    ConsumerSubnav.$injector = ['consumerSearchService']
-    function ConsumerSubnav(consumerSearchService) {
+    ConsumerSubnav.$injector = ['consumerSearchService', '$location']
+    function ConsumerSubnav(consumerSearchService, $location) {
       return {
         restrict: 'E',
         replace: true,
@@ -19,6 +19,7 @@
             if (scope.searchForm.$valid) {
               consumerSearchService.searchText(scope.searchText);
               scope.searchText = '';
+              $location.path('/consumer/home'); // go to the search results page
             } else {
               console.log('invalid');
             }
