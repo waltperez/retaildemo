@@ -88,6 +88,8 @@ gulp.task('server', function() {
   server.listen(options.appPort);
 });
 
+gulp.task('prepare', ['less', 'scripts'], function() {});
+
 // Default Task
 gulp.task('default', ['jshint', 'less', 'scripts', 'watch', 'server'], function() {
   fs.writeFileSync('gulp-default.pid', process.pid.toString(), 'ascii');
