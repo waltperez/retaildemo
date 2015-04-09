@@ -7,9 +7,9 @@
 /* global require */
 (function () {
   'use strict';
-  
+
   console.log('Starting node server..');
-  
+
   var args = {};
   process.argv.forEach(function(arg, index, array) {
     //console.log('argv['+index+']=' + arg);
@@ -25,9 +25,11 @@
     serverScript: args['server-script'] || './server.js',
     appPort: args['app-port'] || 9040,
     mlHost: args['ml-host'] || 'localhost',
-    mlPort: args['ml-port'] || 8040
+    mlPort: args['ml-port'] || 8040,
+    defaultUser: 'mpileggi',
+    defaultPass: 'password'
   };
-  
+
   console.log('server-script: ' + options.serverScript);
   console.log('app-port:      ' + options.appPort);
   console.log('ml-host:       ' + options.mlHost);
