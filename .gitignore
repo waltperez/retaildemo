@@ -6,3 +6,4 @@ local.properties
 *.idea/
 deploy/
 gulpfile.js
+dist/

@@ -23,12 +23,24 @@
               </ul>
             </div>
             <div class="tab-content" ng-switch-when="reviews">
-              <ul class="product-reviews">
-                <li ng-repeat="review in productDetails.data.reviews" class="product-review">
-                  <div class="reviewer"><strong>{{ review.reviewer }}</strong></div>
+              <div class="product-reviews-pagination">
+                <span class="count">Showing {{ productDetails.reviews.start }} to {{ productDetails.reviews.end }} of {{ productDetails.reviews.max }} reviews</span>
+                <a class="prev" ng-click="productDetails.advanceReviews(-productDetails.reviews.bucket)">&laquo; prev</a>
+                <a class="next" ng-click="productDetails.advanceReviews(productDetails.reviews.bucket)">next &raquo;</a>
+              </div>
+              <div class="product-reviews">
+                <div class="product-reviews-map">
+                  <google-map markers="productDetails.reviews.markers" options="productDetails.mapOptions" class="map" fit="true"></google-map>
+                </div>
+                <div ng-repeat="review in productDetails.reviews.shown" class="product-review">
+                  <div class="review-heading">
+                    <rating ng-model="review.rating" readonly="true" max="5"></rating>
+                    <div class="reviewer"><strong>{{ review.reviewer }}</strong></div>
+                  </div>
                   <div class="comment">{{ review.comment }}</div>
-                </li>
-              </ul>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
