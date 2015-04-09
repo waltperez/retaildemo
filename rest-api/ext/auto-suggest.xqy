@@ -25,14 +25,9 @@ function dmlc:get(
 
   let $type-ahead:=
     <tuples>{
-      json:transform-from-json(cts:value-tuples(
-          (cts:field-reference("prod-name","collation=http://marklogic.com/collation/codepoint"),
-          cts:field-reference("prod-desc","collation=http://marklogic.com/collation/codepoint"),
-          cts:field-reference("prod-price")
-          ),(),cts:and-query((cts:field-value-query("prod-name", $query-input,"wildcarded"),
-          cts:field-value-query("prod-desc", "*","wildcarded"),
-          cts:field-value-query("prod-price", "*","wildcarded")
-          ))))
+      cts:value-tuples(
+          (cts:field-reference("prod-name","collation=http://marklogic.com/collation/codepoint")
+          ),(),(cts:field-value-query("prod-name", "iph*","wildcarded")))
     }</tuples>
 
   return document{$type-ahead},
