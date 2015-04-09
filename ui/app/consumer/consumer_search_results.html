@@ -1,7 +1,45 @@
+
+<div class="row">
+  <div class="col-sm-4 col-md-4">
+    <div class="thumbnail tile tile-wide tile-teal">
+      <blockquote>
+        <p class="lead">Most Popular Product Family</p>
+      </blockquote>
+      <h3>
+        {{results.facets['type'].facetValues[0].name}}
+        <span class="label label-danger">{{results.facets['type'].facetValues[0].count}}</span>
+      </h3>
+    </div>
+  </div>
+  <div class="col-sm-4 col-md-4">
+    <div class="thumbnail tile tile-wide tile-blue">
+      <blockquote>
+        <p class="lead">Most Popular Product Category</p>
+      </blockquote>
+      <h3>
+        {{results.facets['productTemplate'].facetValues[0].name.toString().split('_').join(' ');}}
+        <span class="label label-danger">{{results.facets['productTemplate'].facetValues[0].count}}</span>
+      </h3>
+    </div>
+  </div>
+  <div class="col-sm-4 col-md-4">
+    <div class="thumbnail tile tile-wide tile-midnight-blue">
+      <blockquote>
+        <p class="lead">Sale &amp; Promotions</p>
+      </blockquote>
+      <h3>
+        Low Price Guaranteed
+        <span class="label label-danger">{{results.facets['lowPriceGuarantee'].facetValues[0].count}}</span>
+      </h3>
+    </div>
+  </div>
+</div>
+<div class="row">
 <div ng-repeat="result in results.results" class="product-result">
   <a class="thumbnail" ng-href="consumer/detail{{ result.uri }}">
     <div class="thumbnail-wrapper"><img ng-src="{{ result.metadata.image.values[0] }}"></div>
     <div class="caption"><p class="title">{{ result.metadata.name.values[0] }}</p></div>
   </a>
 
+</div>
 </div>
